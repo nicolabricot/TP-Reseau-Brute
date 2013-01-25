@@ -19,10 +19,10 @@ public class Main {
 				Reader reader = new ReaderServer(client.getInputStream());
 				byte discriminant = reader.readDiscriminant();
 				if (discriminant == Protocol.QUERY_TEST) {
-					System.out.println("Discriminant de test a fonctionné !");
+					System.out.println("received: " + discriminant + " [QUERY_TEST]");
 				}
 				else if (discriminant == Protocol.GET_LOGIN) {
-					System.out.println("Discriminant de GET_LOGIN a fonctionné !");
+					System.out.print("recieved: " + discriminant + " [GET_LOGIN] ");
 					System.out.println(reader.readString());
 				}
 			}
