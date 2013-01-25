@@ -20,7 +20,7 @@ public abstract class Writer {
 		}
 	}
 	
-	protected void writeUTF( String s){
+	public void writeUTF( String s){
 		try{
 			out.writeUTF(s);
 		}
