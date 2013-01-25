@@ -6,8 +6,9 @@ import common.Reader;
 
 public class ReaderClient extends Reader {
 	
-	public ReaderClient (DataInputStream dis) {
+	public ReaderClient (DataInputStream is) {
 		super.is = is;
 	}
+	
 
 }
