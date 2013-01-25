@@ -20,15 +20,10 @@ public abstract class Writer {
 	}
 	
 	
-	public void send() {
+	public void send() throws IOException {
 		byte [] message = bos.toByteArray();
-		try {
-			os.write(message);
-			os.flush();
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
+		os.write(message);
+		os.flush();
 	}
 	
 

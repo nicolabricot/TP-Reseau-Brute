@@ -6,7 +6,7 @@ import common.Writer;
 
 public class WriterClient extends Writer {
 
-	public WriterClient(OutputStream os){
+	public WriterClient (OutputStream os){
 		super.os = os;
 	}
 	

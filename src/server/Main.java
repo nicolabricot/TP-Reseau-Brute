@@ -17,13 +17,13 @@ public class Main {
 			while (true) {
 				Socket client = server.accept();
 				Reader reader = new ReaderServer(client.getInputStream());
-				System.out.println(reader.readDiscriminant());
-				byte discnriminant = reader.readDiscriminant();
-				if (discnriminant == Protocol.QUERY_TEST) {
+				byte discriminant = reader.readDiscriminant();
+				if (discriminant == Protocol.QUERY_TEST) {
 					System.out.println("Discriminant de test a fonctionné !");
 				}
-				else if (discnriminant == Protocol.GET_LOGIN) {
+				else if (discriminant == Protocol.GET_LOGIN) {
 					System.out.println("Discriminant de GET_LOGIN a fonctionné !");
+					System.out.println(reader.readString());
 				}
 			}
 		

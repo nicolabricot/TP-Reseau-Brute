@@ -2,8 +2,6 @@ package client;
 
 import java.net.Socket;
 
-import common.Session;
-import common.Writer;
 import common.Protocol;
 
 public class Main {
@@ -18,10 +16,8 @@ public class Main {
 			Socket client = new Socket(serverName, Protocol.PORT);
 			
 			while (true) {
-				Writer writer = new WriterClient(client.getOutputStream());
 				SessionClient session = new SessionClient(client);
-				
-				writer.send();
+				session.getLogin("Valoo");
 			}
 		}
 		catch (Exception e) {

@@ -7,13 +7,12 @@ public abstract class Reader {
 	
 	protected DataInputStream is;
 	
-	public byte readDiscriminant() {
-		try {
-			return is.readByte();
-		}
-		catch (IOException e) {
-			return (Byte) null;
-		}
+	public byte readDiscriminant() throws IOException {
+		return is.readByte();
+	}
+	
+	public String readString() throws IOException {
+		return is.readUTF();
 	}
 	
 }

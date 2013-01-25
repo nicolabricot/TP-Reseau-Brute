@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.Socket;
 
 import common.Protocol;
-import common.Reader;
 import common.Writer;
 
 public class SessionClient {
@@ -17,7 +16,9 @@ public class SessionClient {
 	
 	public void getLogin(String user) throws IOException {
 		Writer writer = new WriterClient(socket.getOutputStream());
-		writer.writeDiscriminant(Protocol.GET_LOGIN);	
+		writer.writeDiscriminant(Protocol.GET_LOGIN);
+		writer.writeString(user);
+		writer.send();
 	}
 	
 	public void test() {
