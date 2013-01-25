@@ -1,26 +1,27 @@
 package client;
 
-import java.io.DataInputStream;
+import java.io.IOException;
 import java.net.Socket;
 
 import common.Protocol;
-import common.Session;
-import common.Writer;
 import common.Reader;
+import common.Writer;
 
-public class SessionClient extends Session{
+public class SessionClient {
 	
+	protected Socket socket;
 	
-	
-	public SessionClient(Socket socket) {
-		super.socket = socket;
-		super.writer = new WriterClient(socket.getOutputStream());
-		super.reader = new ReaderClient( socket.getInputStream());
-		
+	public SessionClient(Socket socket) throws IOException {
+		this.socket = socket;
 	}
 	
-	public void getLogin(String user){
-		super.writer().writeDiscriminant(Protocol.GET_LOGIN);		
+	public void getLogin(String user) throws IOException {
+		Writer writer = new WriterClient(socket.getOutputStream());
+		writer.writeDiscriminant(Protocol.GET_LOGIN);	
+	}
+	
+	public void test() {
+		
 	}
 
 }

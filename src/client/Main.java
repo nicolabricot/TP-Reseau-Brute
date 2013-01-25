@@ -19,8 +19,7 @@ public class Main {
 			
 			while (true) {
 				Writer writer = new WriterClient(client.getOutputStream());
-				Session session = new SessionClient(client);
-				session.getLogin("user");
+				SessionClient session = new SessionClient(client);
 				
 				writer.send();
 			}
