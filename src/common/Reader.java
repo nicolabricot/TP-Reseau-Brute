@@ -2,34 +2,19 @@ package common;
 
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 public abstract class Reader {
 	
-	protected DataInputStream is;
+	protected InputStream is;
+	protected DataInputStream dis;
 	
 	public byte readDiscriminant() {
 		try {
-			return is.readByte();
+			return dis.readByte();
 		} catch (IOException e) {
 			return (Byte) null;
 		}
 	}
 	
-	protected int readInt() {
-		try {
-			return is.readInt();
-		}
-		catch (IOException e){
-			return 0;
-		}
-	}
-	
-	protected String readUTF() {
-		try {
-			return is.readUTF();
-		}
-		catch (IOException e){
-			return "";			
-		}
-	}
 }

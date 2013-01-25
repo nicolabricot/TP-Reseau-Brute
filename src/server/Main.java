@@ -18,8 +18,12 @@ public class Main {
 				Socket client = server.accept();
 				Reader reader = new ReaderServer(client.getInputStream());
 				System.out.println(reader.readDiscriminant());
-				if (reader.readDiscriminant() == Protocol.QUERY_TEST) {
+				byte discnriminant = reader.readDiscriminant();
+				if (discnriminant == Protocol.QUERY_TEST) {
 					System.out.println("Discriminant de test a fonctionné !");
+				}
+				else if (discnriminant == Protocol.GET_LOGIN) {
+					System.out.println("Discriminant de GET_LOGIN a fonctionné !");
 				}
 			}
 		
