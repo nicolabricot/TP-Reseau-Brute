@@ -22,7 +22,7 @@ public class SessionClient {
 		writer.writeString(user);
 		writer.send();
 		
-		Reader reader = new ReaderClient((DataInputStream) socket.getInputStream());
+		Reader reader = new ReaderClient(socket.getInputStream());
 		byte discriminant = reader.readDiscriminant();
 		if(discriminant == Protocol.REP_OK) {
 			System.out.println("Réponse ok !");
