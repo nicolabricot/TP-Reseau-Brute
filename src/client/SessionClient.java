@@ -24,9 +24,11 @@ public class SessionClient {
 		
 		Reader reader = new ReaderClient((DataInputStream) socket.getInputStream());
 		byte discriminant = reader.readDiscriminant();
-		if(discriminant == Protocol.GET_LOGIN) {
-			System.out.println("Discriminant de GET_LOGIN a fonctionné !");
-			System.out.println(reader.readString());
+		if(discriminant == Protocol.REP_OK) {
+			System.out.println("Réponse ok !");
+					}
+		else if(discriminant == Protocol.REP_KO){
+			System.out.println("Réponse ko !");
 		}
 		return true;
 	}
