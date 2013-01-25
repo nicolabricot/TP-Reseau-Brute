@@ -18,11 +18,12 @@ public class Main {
 				Socket client = server.accept();
 				Reader reader = new ReaderServer(client.getInputStream());
 				byte discriminant = reader.readDiscriminant();
+				System.out.println("Server received: " + discriminant);
 				if (discriminant == Protocol.QUERY_TEST) {
-					System.out.println("received: " + discriminant + " [QUERY_TEST]");
+					System.out.println("[QUERY_TEST]");
 				}
 				else if (discriminant == Protocol.GET_LOGIN) {
-					System.out.print("recieved: " + discriminant + " [GET_LOGIN] ");
+					System.out.print("[GET_LOGIN] ");
 					System.out.println(reader.readString());
 				}
 			}
