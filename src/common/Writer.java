@@ -11,31 +11,40 @@ public abstract class Writer {
 	protected ByteArrayOutputStream bos = new ByteArrayOutputStream();
 	protected DataOutputStream out = new DataOutputStream(bos);
 	
-	protected void writeInt( int i){
-		try{
+	public void writeDiscriminant(byte b) {
+		try {
+			out.writeByte(b);
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void writeInt (int i){
+		try {
 			out.writeInt(i);
 		}
-		catch(IOException e){
+		catch (IOException e){
 			e.printStackTrace();
 		}
 	}
 	
-	public void writeUTF( String s){
-		try{
+	public void writeUTF (String s) {
+		try {
 			out.writeUTF(s);
 		}
-		catch(IOException e){
+		catch (IOException e){
 			e.printStackTrace();
 		}
 	}
 	
-	public void send(){
+	public void send() {
 		byte [] message = bos.toByteArray();
-		try{
+		try {
 			os.write(message);
 			os.flush();
 		}
-		catch(IOException e){
+		catch (IOException e) {
 			e.printStackTrace();
 		}
 	}

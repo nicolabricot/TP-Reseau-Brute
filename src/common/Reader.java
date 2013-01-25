@@ -6,23 +6,29 @@ import java.io.IOException;
 public abstract class Reader {
 	
 	protected DataInputStream is;
-	protected String text;
-	protected int type;
 	
-	protected int readInt(){
-		try{
+	public byte readDiscriminant() {
+		try {
+			return is.readByte();
+		} catch (IOException e) {
+			return (Byte) null;
+		}
+	}
+	
+	protected int readInt() {
+		try {
 			return is.readInt();
 		}
-		catch(IOException e){
+		catch (IOException e){
 			return 0;
 		}
 	}
 	
-	protected String readUTF(){
-		try{
+	protected String readUTF() {
+		try {
 			return is.readUTF();
 		}
-		catch(IOException e){
+		catch (IOException e){
 			return "";			
 		}
 	}

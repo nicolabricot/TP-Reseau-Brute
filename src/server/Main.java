@@ -5,6 +5,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 import common.Protocol;
+import common.Reader;
 
 public class Main {
 
@@ -15,7 +16,11 @@ public class Main {
 			
 			while (true) {
 				Socket client = server.accept();
-				System.out.println(client.getInputStream());
+				Reader reader = new ReaderServer(client.getInputStream());
+				System.out.println(reader.readDiscriminant());
+				if (reader.readDiscriminant() == Protocol.QUERY_TEST) {
+					System.out.println("Discriminant de test a fonctionné !");
+				}
 			}
 		
 		} catch (IOException e) {
