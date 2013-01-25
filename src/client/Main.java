@@ -18,6 +18,8 @@ public class Main {
 			while (true) {
 				SessionClient session = new SessionClient(client);
 				session.getLogin("Valoo");
+				session.getLogin("Nico");
+				session.getLogin("Bidule");
 			}
 		}
 		catch (Exception e) {
