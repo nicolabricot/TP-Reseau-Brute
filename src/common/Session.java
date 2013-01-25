@@ -4,9 +4,9 @@ import java.net.Socket;
 
 public abstract class Session {
 	
-	private Socket socket;
-	private Reader reader;
-	private Writer writer;
+	protected Socket socket;
+	protected Reader reader;
+	protected Writer writer;
 	
 	public Socket socket() {
 		return socket;

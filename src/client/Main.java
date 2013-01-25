@@ -1,6 +1,8 @@
 package client;
 
 import java.net.Socket;
+
+import common.Session;
 import common.Writer;
 import common.Protocol;
 
@@ -17,7 +19,9 @@ public class Main {
 			
 			while (true) {
 				Writer writer = new WriterClient(client.getOutputStream());
-				writer.writeDiscriminant(Protocol.QUERY_TEST);
+				Session session = new SessionClient(client);
+				session.getLogin("user");
+				
 				writer.send();
 			}
 		}
