@@ -16,7 +16,7 @@ public class Main {
 			System.out.println("Server started");
 			
 			while (true) {
-				System.out.println("\nnew boucle");
+				System.out.println("\nready");
 				
 				Socket client = server.accept();
 				Reader reader = new ReaderServer(client.getInputStream());

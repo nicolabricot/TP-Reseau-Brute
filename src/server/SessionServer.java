@@ -16,10 +16,12 @@ public class SessionServer {
 	}
 	
 	public void ok() throws IOException {
+		System.out.println("Server send: [OK]");
 		writer.writeDiscriminant(Protocol.REP_OK);
 		writer.send();
 	}
 	public void ko() throws IOException {
+		System.out.println("Server send: [KO]");
 		writer.writeDiscriminant(Protocol.REP_KO);
 		writer.send();
 	}

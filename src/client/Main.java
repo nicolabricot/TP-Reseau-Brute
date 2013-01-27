@@ -15,24 +15,17 @@ public class Main {
 		try {
 			
 			while (true) {
-				Socket client = new Socket(serverName, Protocol.PORT);
-				
-				SessionClient session = new SessionClient(client);
+				SessionClient session = new SessionClient(new Socket(serverName, Protocol.PORT));
 				System.out.println("[1]");
 				session.getLogin("Valoo");
-				client.close();
 				
-				client = new Socket(serverName, Protocol.PORT);
-				session = new SessionClient(client);
+				session = new SessionClient(new Socket(serverName, Protocol.PORT));
 				System.out.println("[2]");
 				session.getLogin("Nico");				
-				client.close();
 				
-				client = new Socket(serverName, Protocol.PORT);
 				session = new SessionClient(new Socket(serverName, Protocol.PORT));
 				System.out.println("[3]");
 				session.getLogin("Bidule");
-				client.close();
 			}
 		}
 		catch (Exception e) {
