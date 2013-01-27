@@ -28,7 +28,7 @@ public class SessionClient {
 	public boolean login(String user) throws IOException {
 		Writer w = new WriterClient(this.socket.getOutputStream());
 		
-		System.out.println("Client send: " + (byte) Protocol.LOGIN + " [GET_LOGIN] " + user);
+		System.out.println("Client send: " + (byte) Protocol.LOGIN + " [LOGIN] " + user);
 		
 		w.writeDiscriminant(Protocol.LOGIN);
 		w.writeString(user);
