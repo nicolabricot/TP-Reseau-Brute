@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import common.Protocol;
-import common.Reader;
+import network.Protocol;
+import network.Reader;
 
 public class Main {
 
@@ -28,7 +28,7 @@ public class Main {
 				if (discriminant == Protocol.QUERY_TEST) {
 					System.out.println("[QUERY_TEST]");
 				}
-				else if (discriminant == Protocol.GET_LOGIN) {
+				else if (discriminant == Protocol.LOGIN) {
 					System.out.print("[GET_LOGIN] ");
 					String login = reader.readString();
 					System.out.println(login);

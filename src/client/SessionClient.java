@@ -2,10 +2,9 @@ package client;
 
 import java.io.IOException;
 import java.net.Socket;
-
-import common.Protocol;
-import common.Reader;
-import common.Writer;
+import network.Protocol;
+import network.Reader;
+import network.Writer;
 
 public class SessionClient {
 	
@@ -20,7 +19,7 @@ public class SessionClient {
 		
 		System.out.println("Client send: [GET_LOGIN] " + user);
 		
-		writer.writeDiscriminant(Protocol.GET_LOGIN);
+		writer.writeDiscriminant(Protocol.LOGIN);
 		writer.writeString(user);
 		writer.send();
 		
