@@ -5,8 +5,8 @@ public abstract class Protocol {
 	static final public int PORT = 12345;
 
 	/* COMMON */
-	static final public byte REP_KO = 0x0; // 0
-	static final public byte REP_OK = 0x1; // 1
+	static final public byte KO = 0x0; // 0
+	static final public byte OK = 0x1; // 1
 	// Test
 	static final public byte QUERY_TEST = 0x2; // 2
 
