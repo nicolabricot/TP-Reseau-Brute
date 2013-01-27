@@ -2,10 +2,9 @@ package client;
 
 import java.io.IOException;
 import java.net.Socket;
-
-import common.Protocol;
-import common.Reader;
-import common.Writer;
+import network.Protocol;
+import network.Reader;
+import network.Writer;
 
 public class SessionClient {
 	
@@ -15,26 +14,39 @@ public class SessionClient {
 		this.socket = socket;
 	}
 	
-	public boolean getLogin(String user) throws IOException {
-		Writer writer = new WriterClient(this.socket.getOutputStream());
+	private boolean status(byte discriminant) {
+		System.out.print("Client received: " +  (byte) discriminant + " ");
 		
-		System.out.println("Client send: [GET_LOGIN] " + user);
-		
-		writer.writeDiscriminant(Protocol.GET_LOGIN);
-		writer.writeString(user);
-		writer.send();
-		
-		Reader reader = new ReaderClient(socket.getInputStream());
-		byte discriminant = reader.readDiscriminant();
-		
-		System.out.print("Client received: ");
-		
-		if(discriminant == Protocol.REP_OK)
+		if (discriminant == Protocol.OK) {
 			System.out.println("[OK]");
-		else
-			System.out.println("[KO]");
+			return true;
+		}
+		System.out.println("[KO]");
+		return false;
+	}
+	
+	public boolean login(String user) throws IOException {
+		Writer w = new WriterClient(this.socket.getOutputStream());
+		
+		System.out.println("Client send: " + (byte) Protocol.LOGIN + " [GET_LOGIN] " + user);
+		
+		w.writeDiscriminant(Protocol.LOGIN);
+		w.writeString(user);
+		w.send();
+		
+		Reader r = new ReaderClient(socket.getInputStream());
+		return status(r.readDiscriminant());
+	}
 
-		return true;
+	public boolean query_test() throws IOException {
+		Writer w = new WriterClient(this.socket.getOutputStream());
+		
+		System.out.println("Client send: " + (byte) Protocol.QUERY_TEST + " [QUERY_TEST]");
+		w.writeDiscriminant(Protocol.QUERY_TEST);
+		w.send();
+
+		Reader r = new ReaderClient(socket.getInputStream());
+		return status(r.readDiscriminant());
 	}
 	
 	

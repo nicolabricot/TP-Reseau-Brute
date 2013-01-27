@@ -2,8 +2,8 @@ package server;
 
 import java.io.IOException;
 import java.net.Socket;
-import common.Protocol;
-import common.Writer;
+import network.Protocol;
+import network.Writer;
 
 public class SessionServer {
 	
@@ -16,13 +16,13 @@ public class SessionServer {
 	}
 	
 	public void ok() throws IOException {
-		System.out.println("Server send: [OK]");
-		writer.writeDiscriminant(Protocol.REP_OK);
+		System.out.println("\nServer send: " +  (byte) Protocol.OK + " [OK]");
+		writer.writeDiscriminant(Protocol.OK);
 		writer.send();
 	}
 	public void ko() throws IOException {
-		System.out.println("Server send: [KO]");
-		writer.writeDiscriminant(Protocol.REP_KO);
+		System.out.println("\nServer send: " +  (byte) Protocol.KO + " [KO]");
+		writer.writeDiscriminant(Protocol.KO);
 		writer.send();
 	}
 

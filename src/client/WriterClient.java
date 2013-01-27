@@ -1,8 +1,7 @@
 package client;
 
 import java.io.OutputStream;
-
-import common.Writer;
+import network.Writer;
 
 public class WriterClient extends Writer {
 

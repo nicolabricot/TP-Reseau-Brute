@@ -2,8 +2,7 @@ package client;
 
 import java.io.DataInputStream;
 import java.io.InputStream;
-
-import common.Reader;
+import network.Reader;
 
 public class ReaderClient extends Reader {
 	
