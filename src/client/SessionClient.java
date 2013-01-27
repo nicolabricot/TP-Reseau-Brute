@@ -1,6 +1,5 @@
 package client;
 
-import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.Socket;
 
@@ -18,18 +17,23 @@ public class SessionClient {
 	
 	public boolean getLogin(String user) throws IOException {
 		Writer writer = new WriterClient(this.socket.getOutputStream());
+		
+		System.out.println("Client send: [GET_LOGIN] " + user);
+		
 		writer.writeDiscriminant(Protocol.GET_LOGIN);
 		writer.writeString(user);
 		writer.send();
 		
 		Reader reader = new ReaderClient(socket.getInputStream());
 		byte discriminant = reader.readDiscriminant();
-		if(discriminant == Protocol.REP_OK) {
-			System.out.println("Réponse ok !");
-					}
-		else if(discriminant == Protocol.REP_KO){
-			System.out.println("Réponse ko !");
-		}
+		
+		System.out.print("Client received: ");
+		
+		if(discriminant == Protocol.REP_OK)
+			System.out.println("[OK]");
+		else
+			System.out.println("[KO]");
+
 		return true;
 	}
 	
