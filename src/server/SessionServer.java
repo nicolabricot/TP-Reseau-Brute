@@ -2,8 +2,8 @@ package server;
 
 import java.io.IOException;
 import java.net.Socket;
-import common.Protocol;
-import common.Writer;
+import network.Protocol;
+import network.Writer;
 
 public class SessionServer {
 	

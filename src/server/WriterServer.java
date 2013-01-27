@@ -1,8 +1,7 @@
 package server;
 
 import java.io.OutputStream;
-
-import common.Writer;
+import network.Writer;
 
 public class WriterServer extends Writer {
 	

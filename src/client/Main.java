@@ -2,7 +2,7 @@ package client;
 
 import java.net.Socket;
 
-import common.Protocol;
+import network.Protocol;
 
 public class Main {
 	
