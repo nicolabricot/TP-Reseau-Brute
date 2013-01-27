@@ -13,14 +13,17 @@ public class Main {
 		
 		try {
 			ServerSocket server = new ServerSocket(Protocol.PORT);
+			System.out.println("Server started");
 			
 			while (true) {
+				System.out.println("\nnew boucle");
+				
 				Socket client = server.accept();
 				Reader reader = new ReaderServer(client.getInputStream());
 				SessionServer session = new SessionServer(client);
 				
 				byte discriminant = reader.readDiscriminant();
-				System.out.println("Server received: " + discriminant);
+				System.out.print("Server received: ");
 				
 				if (discriminant == Protocol.QUERY_TEST) {
 					System.out.println("[QUERY_TEST]");
@@ -34,6 +37,7 @@ public class Main {
 					else
 						session.ko();
 				}
+				client.close();
 			}
 		
 		} catch (IOException e) {
