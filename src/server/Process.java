@@ -26,6 +26,16 @@ public abstract class Process {
 			else
 				session.ko();
 			break;
+			
+		case Protocol.GET_BRUTE_INFO:
+			int id = reader.readInt();
+			System.out.print("[GET_BRUTE_INFO] " + id);
+			if (id >= 0 && id < Data.brutes.size())
+				session.replyBruteInfo(id);
+			else
+				session.ko();
+			
+			break;
 		
 		default:
 			session.ko();

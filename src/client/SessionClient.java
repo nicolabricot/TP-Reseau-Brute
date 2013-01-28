@@ -2,6 +2,8 @@ package client;
 
 import java.io.IOException;
 import java.net.Socket;
+
+import brute.Brute;
 import network.Protocol;
 import network.Reader;
 import network.Writer;
@@ -47,6 +49,34 @@ public class SessionClient {
 
 		Reader r = new ReaderClient(socket.getInputStream());
 		return status(r.readDiscriminant());
+	}
+	
+	public Brute getBruteInfo(int id) throws IOException {
+		Writer w = new WriterClient(this.socket.getOutputStream());
+		
+		System.out.println("Client send: " + (byte) Protocol.GET_BRUTE_INFO + " [GET_BRUTE_INFO] " + id);
+		w.writeDiscriminant(Protocol.GET_BRUTE_INFO);
+		w.writeInt(id);
+		w.send();
+		
+		Reader r = new ReaderClient(socket.getInputStream());
+		byte d = r.readDiscriminant();
+		
+		System.out.print("Client received: " + d + " ");
+		
+		if (d == Protocol.KO) {
+			System.out.println("[KO]");
+			return null;
+		}
+		
+		System.out.print("[REPLY_BRUTE_INFO] ");
+		String name = r.readString();
+		int level = r.readInt();
+		int life = r.readInt();
+		int strengh = r.readInt();
+		int speed = r.readInt();
+		System.out.println(name + " " + level + " " + life + " " + strengh + " " + speed);
+		return new Brute(name, level, life, strengh, speed);
 	}
 	
 	

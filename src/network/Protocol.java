@@ -12,17 +12,20 @@ public abstract class Protocol {
 
 	/* CLIENT -> SERVER */
 	static final public byte LOGIN = 0xA; // 10
-	// me
+	// brutes
 	static final public byte GET_BRUTE_INFO = 0x14; // 20
 	static final public byte GET_BRUTE_BONUS = 0x15; // 21
 	static final public byte GET_BRUTE_IMG = 0x16; // 22
-	// adversaire
-	static final public byte GET_ADVERSAIRE_INFO = 0x1E; // 30
-	static final public byte GET_ADVERSAIRE_BONUS = 0x1F; // 31
-	static final public byte GET_ADVERSAIRE_IMG = 0x21; // 32
 	// combat
 	static final public byte VICTORY = 0x28; // 40
 	static final public byte DEFEAT = 0x29; // 41
 	static final public byte COMBAT = 0x2A; // 42
-
+	
+	/* SERVER -> CLIENT */
+	// brutes
+	static final public byte REPLY_BRUTE_INFO = 0x1E; // 30
+	static final public byte REPLY_BRUTE_BONUS = 0x1F; // 31
+	static final public byte REPLY_BRUTE_IMG = 0x20; // 32
+	
+	
 }

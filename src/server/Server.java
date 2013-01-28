@@ -31,7 +31,8 @@ public class Server {
 				client.close();
 			}
 		
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			e.printStackTrace();
 		}
 	}

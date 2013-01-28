@@ -23,30 +23,32 @@ public class Client {
 			client = new Socket(server, Protocol.PORT);
 			session = new SessionClient(client);
 			System.out.println("[" + state++ + "]");
-			boolean connect = session.query_test();
+			session.query_test();
 			client.close();
 			
-			if (connect) {
-				client = new Socket(server, Protocol.PORT);
-				session = new SessionClient(client);
-				System.out.println("[" + state++ + "]");
-				session.login("Valoo");
-				client.close();
-				
-				client = new Socket(server, Protocol.PORT);
-				session = new SessionClient(client);
-				System.out.println("[" + state++ + "]");
-				session.login("unknown");
-				client.close();
-				
-				client = new Socket(server, Protocol.PORT);
-				session = new SessionClient(client);
-				System.out.println("[" + state++ + "]");
-				session.login("Nico");
-				client.close();
-			}
-			else
-				System.out.println("Can't connect to " + server);
+			client = new Socket(server, Protocol.PORT);
+			session = new SessionClient(client);
+			System.out.println("[" + state++ + "]");
+			session.login("Valoo");
+			client.close();
+			
+			client = new Socket(server, Protocol.PORT);
+			session = new SessionClient(client);
+			System.out.println("[" + state++ + "]");
+			session.login("unknown");
+			client.close();
+			
+			client = new Socket(server, Protocol.PORT);
+			session = new SessionClient(client);
+			System.out.println("[" + state++ + "]");
+			session.login("Nico");
+			client.close();
+			
+			client = new Socket(server, Protocol.PORT);
+			session = new SessionClient(client);
+			System.out.println("[" + state++ + "]");
+			System.out.println(session.getBruteInfo(3));
+			client.close();
 			
 			//*/
 			
