@@ -14,5 +14,9 @@ public abstract class Reader {
 	public String readString() throws IOException {
 		return is.readUTF();
 	}
+	
+	public int readInt() throws IOException {
+		return is.readInt();
+	}
 
 }

@@ -18,6 +18,10 @@ public abstract class Writer {
 	public void writeString(String s) throws IOException {
 		out.writeUTF(s);
 	}
+	
+	public void writeInt(int i) throws IOException {
+		out.writeInt(i);
+	}
 
 	public void send() throws IOException {
 		byte[] message = bos.toByteArray();
