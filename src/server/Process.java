@@ -11,6 +11,8 @@ public abstract class Process {
 	public static void decode(byte discriminant, Socket client, Reader reader) throws IOException {
 		SessionServer session = new SessionServer(client);
 		
+		int id;
+		
 		switch (discriminant) {
 		
 		case Protocol.QUERY_TEST:
@@ -28,13 +30,21 @@ public abstract class Process {
 			break;
 			
 		case Protocol.GET_BRUTE_INFO:
-			int id = reader.readInt();
+			id = reader.readInt();
 			System.out.print("[GET_BRUTE_INFO] " + id);
 			if (id >= 0 && id < Data.brutes.size())
 				session.replyBruteInfo(id);
 			else
 				session.ko();
+			break;
 			
+		case Protocol.GET_BRUTE_BONUS:
+			id = reader.readInt();
+			System.out.print("[GET_BRUTE_BONUS] " + id);
+			if (id >= 0 && id < Data.brutes.size())
+				session.replyBruteBonus(id);
+			else
+				session.ko();
 			break;
 		
 		default:

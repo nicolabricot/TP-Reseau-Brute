@@ -2,7 +2,9 @@ package client;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 
+import brute.Bonus;
 import brute.Brute;
 import network.Protocol;
 import network.Reader;
@@ -64,19 +66,58 @@ public class SessionClient {
 		
 		System.out.print("Client received: " + d + " ");
 		
-		if (d == Protocol.KO) {
-			System.out.println("[KO]");
-			return null;
+		if (d != Protocol.KO) {
+			System.out.print("[REPLY_BRUTE_INFO] ");
+			String name = r.readString();
+			int level = r.readInt();
+			int life = r.readInt();
+			int strengh = r.readInt();
+			int speed = r.readInt();
+			System.out.println(name + " " + level + " " + life + " " + strengh + " " + speed);
+			return new Brute(name, level, life, strengh, speed);
 		}
 		
-		System.out.print("[REPLY_BRUTE_INFO] ");
-		String name = r.readString();
-		int level = r.readInt();
-		int life = r.readInt();
-		int strengh = r.readInt();
-		int speed = r.readInt();
-		System.out.println(name + " " + level + " " + life + " " + strengh + " " + speed);
-		return new Brute(name, level, life, strengh, speed);
+		System.out.println("[KO]");
+		return null;
+	}
+
+	public ArrayList<Bonus> getBruteBonus(int id) throws IOException {
+		Writer w = new WriterClient(this.socket.getOutputStream());
+		
+		System.out.println("Client send: " + (byte) Protocol.GET_BRUTE_BONUS + " [GET_BRUTE_BONUS] " + id);
+		w.writeDiscriminant(Protocol.GET_BRUTE_BONUS);
+		w.writeInt(id);
+		w.send();
+		
+		Reader r = new ReaderClient(socket.getInputStream());
+		byte d = r.readDiscriminant();
+				
+		System.out.print("Client received: " + d + " ");
+		
+		if (d != Protocol.KO) {		
+			System.out.print("[REPLY_BRUTE_INFO] ");
+			
+			int size = r.readInt();
+			System.out.print(size + " ");
+			
+			ArrayList<Bonus> bonus = new ArrayList<Bonus>();
+			for (int i=0; i<size; i++) {
+				String name = r.readString();
+				int level = r.readInt();
+				int life = r.readInt();
+				int strengh = r.readInt();
+				int speed = r.readInt();
+				System.out.print(name + " " + level + " " + life + " " + strengh + " " + speed + " ");
+				bonus.add(new Bonus(name, level, life, strengh, speed));
+			}
+			
+			System.out.println();
+			return bonus;
+		}
+		
+		System.out.println("[KO]");
+		return null;
+		
 	}
 	
 	
