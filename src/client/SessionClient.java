@@ -29,12 +29,12 @@ public class SessionClient {
 		return false;
 	}
 	
-	public boolean login(String user) throws IOException {
+	public boolean getLogin(String user) throws IOException {
 		Writer w = new WriterClient(this.socket.getOutputStream());
 		
-		System.out.println("Client send: " + (byte) Protocol.LOGIN + " [LOGIN] " + user);
+		System.out.println("Client send: " + (byte) Protocol.GET_LOGIN + " [GET_LOGIN] " + user);
 		
-		w.writeDiscriminant(Protocol.LOGIN);
+		w.writeDiscriminant(Protocol.GET_LOGIN);
 		w.writeString(user);
 		w.send();
 		
@@ -66,7 +66,7 @@ public class SessionClient {
 		
 		System.out.print("Client received: " + d + " ");
 		
-		if (d != Protocol.KO) {
+		if (d == Protocol.REPLY_BRUTE_INFO) {
 			System.out.print("[REPLY_BRUTE_INFO] ");
 			String name = r.readString();
 			int level = r.readInt();
@@ -94,7 +94,7 @@ public class SessionClient {
 				
 		System.out.print("Client received: " + d + " ");
 		
-		if (d != Protocol.KO) {		
+		if (d --== Protocol.REPLY_BRUTE_INFO) {		
 			System.out.print("[REPLY_BRUTE_INFO] ");
 			
 			int size = r.readInt();
@@ -117,9 +117,81 @@ public class SessionClient {
 		
 		System.out.println("[KO]");
 		return null;
-		
 	}
 	
+	public int getAdversaire(int me) throws IOException {
+		Writer w = new WriterClient(this.socket.getOutputStream());
+		
+		System.out.println("Client send: " + (byte) Protocol.GET_ADVERSAIRE + " [GET_ADVERSAIRE] " + me);
+		w.writeDiscriminant(Protocol.GET_ADVERSAIRE);
+		w.writeInt(me);
+		w.send();
+		
+		Reader r = new ReaderClient(socket.getInputStream());
+		byte d = r.readDiscriminant();
+		
+		System.out.print("Client received: " + d + " ");
+		
+		if (d == Protocol.REPLY_ADVERSAIRE) {
+			System.out.print("[REPLY_ADVERSAIRE] ");
+			int other = r.readInt();
+			System.out.println(other);
+			return other;
+		}
+		
+		System.out.println("[KO]");
+		return -1;
+	}
 	
+	public boolean getVictory(int one, int two) throws IOException {
+		Writer w = new WriterClient(this.socket.getOutputStream());
+		
+		System.out.println("Client send: " + (byte) Protocol.GET_VICTORY + " [GET_VICTORY] " + one + " " + two);
+		w.writeDiscriminant(Protocol.GET_VICTORY);
+		w.writeInt(one);
+		w.writeInt(two);
+		w.send();
+		
+		Reader r = new ReaderClient(socket.getInputStream());
+		return status(r.readDiscriminant());
+	}
+	
+	public boolean getDefeat(int one, int two) throws IOException {
+		Writer w = new WriterClient(this.socket.getOutputStream());
+		
+		System.out.println("Client send: " + (byte) Protocol.GET_DEFEAT + " [GET_DEFEAT] " + one + " " + two);
+		w.writeDiscriminant(Protocol.GET_DEFEAT);
+		w.writeInt(one);
+		w.writeInt(two);
+		w.send();
+		
+		Reader r = new ReaderClient(socket.getInputStream());
+		return status(r.readDiscriminant());
+	}
 
+	public int getCombat(int one, int two) throws IOException {
+		Writer w = new WriterClient(this.socket.getOutputStream());
+		
+		System.out.println("Client send: " + (byte) Protocol.GET_COMBAT + " [GET_COMBAT] " + one + " " + two);
+		w.writeDiscriminant(Protocol.GET_COMBAT);
+		w.writeInt(one);
+		w.writeInt(two);
+		w.send();
+		
+		Reader r = new ReaderClient(socket.getInputStream());
+		byte d = r.readDiscriminant();
+		
+		System.out.print("Client received: " + d + " ");
+		
+		if (d == Protocol.REPLY_COMBAT) {
+			System.out.print("[REPLY_COMBAT] ");
+			int winner = r.readInt();
+			System.out.println(winner);
+			return winner;
+		}
+		
+		System.out.println("[KO]");
+		return -1;
+	}
+	
 }

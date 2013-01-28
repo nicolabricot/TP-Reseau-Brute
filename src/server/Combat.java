@@ -24,12 +24,6 @@ public class Combat {
 		looser(two);
 	}
 	
-	public void defeat() {
-		winner = two;
-		winner(two);
-		looser(one);
-	}
-	
 	public void loyal() {
 		winner = ((int) Math.floor(Math.random()*10)) < 5 ? one : two ;
 		winner(winner);

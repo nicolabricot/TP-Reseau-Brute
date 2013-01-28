@@ -29,6 +29,13 @@ public class SessionServer {
 		writer.writeDiscriminant(Protocol.KO);
 		writer.send();
 	}
+	
+	public void replyLogin(String login) throws IOException {
+		if (login.equals("Valoo") || login.equals("Nico"))
+			ok();
+		else
+			ko();
+	}
 
 	public void replyBruteInfo(int id) throws IOException {
 		Brute b = new Brute(Data.brutes.get(id));
@@ -62,6 +69,37 @@ public class SessionServer {
 		}
 		System.out.println();
 		writer.send();
-		
 	}
+	
+	public void replyAdversaire(int me) throws IOException {
+		if (Data.availableBrutes.size() >= 2) {
+			int other = (int) Math.floor(Math.random()*Data.availableBrutes.size());
+			while (me == other)
+				other = (int) Math.floor(Math.random()*Data.availableBrutes.size());
+			
+			System.out.println("\nServer send: " + (byte) Protocol.REPLY_ADVERSAIRE + " [REPLY_ADVERSAIRE] " + other);
+			writer.writeDiscriminant(Protocol.REPLY_ADVERSAIRE);
+			writer.writeInt(other);
+			writer.send();
+		}
+		else
+			ko();
+	}
+	
+	public void replyFakeCombat(int one, int two) throws IOException {
+		Combat c = new Combat(one, two);
+		c.victory();
+		ok();
+	}
+
+	public void replyCombat(int one, int two) throws IOException {
+		Combat c = new Combat(one, two);
+		c.loyal();
+		
+		System.out.println("\nServer send: " + (byte) Protocol.REPLY_COMBAT + " [REPLY_COMBAT] " + c.result());
+		writer.writeDiscriminant(Protocol.REPLY_COMBAT);
+		writer.writeInt(c.result());
+		writer.send();
+	}
+	
 }

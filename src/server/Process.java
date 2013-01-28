@@ -11,7 +11,7 @@ public abstract class Process {
 	public static void decode(byte discriminant, Socket client, Reader reader) throws IOException {
 		SessionServer session = new SessionServer(client);
 		
-		int id;
+		int id, one, two;
 		
 		switch (discriminant) {
 		
@@ -20,13 +20,10 @@ public abstract class Process {
 			session.ok();
 			break;
 			
-		case Protocol.LOGIN:
+		case Protocol.GET_LOGIN:
 			String login = reader.readString();
-			System.out.print("[LOGIN] " + login);
-			if (login.equals("Valoo") || login.equals("Nico"))
-				session.ok();
-			else
-				session.ko();
+			System.out.print("[GET_LOGIN] " + login);
+			session.replyLogin(login);
 			break;
 			
 		case Protocol.GET_BRUTE_INFO:
@@ -46,12 +43,45 @@ public abstract class Process {
 			else
 				session.ko();
 			break;
+			
+		case Protocol.GET_ADVERSAIRE:
+			id = reader.readInt();
+			System.out.print("[GET_ADVERSAIRE] " + id);
+			if (id >= 0 && id < Data.brutes.size())
+				session.replyAdversaire(id);
+			else
+				session.ko();
+			break;
+			
+		case Protocol.GET_VICTORY:
+		case Protocol.GET_DEFEAT:
+			one = reader.readInt();
+			two = reader.readInt();
+			System.out.print((discriminant == Protocol.GET_VICTORY ? "[GET_VICTORY]" : "[GET_DEFEAT]") + " " + one + " " + two);
+			if (one >= 0 && one < Data.brutes.size() && two >= 0 && two < Data.brutes.size() && one != two) {
+				if (discriminant == Protocol.GET_VICTORY)
+					session.replyFakeCombat(one, two);
+				else
+					session.replyFakeCombat(two, one);
+			}	
+			else
+				session.ko();
+			break;
+			
+		case Protocol.GET_COMBAT:
+			one = reader.readInt();
+			two = reader.readInt();
+			System.out.print("[GET_COMBAT] " + one + " " + two);
+			if (one >= 0 && one < Data.brutes.size() && two >= 0 && two < Data.brutes.size() && one != two)
+				session.replyCombat(one, two);
+			else
+				session.ko();
+			break;
 		
 		default:
 			session.ko();
 		}
 		
-	}
-	
+	}	
 	
 }
