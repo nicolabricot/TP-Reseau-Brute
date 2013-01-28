@@ -129,7 +129,7 @@ public class Brute {
 	
 	
 	public String toString() {
-		return "\n[" + name + "]\nLevel: \t" + level() + "\nPV: \t" + life() + "\nPower: \t" + strengh() + "\nSpeed: \t" + speed() ;
+		return "[" + name + "]\nLevel: \t" + level() + "\nLife: \t" + life() + "\nPower: \t" + strengh() + "\nSpeed: \t" + speed() ;
 	}
 	
 }
