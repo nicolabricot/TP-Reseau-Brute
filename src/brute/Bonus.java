@@ -33,6 +33,6 @@ public class Bonus {
 	}
 	
 	public String toString() {
-		return level + "/" + life + "/" + strengh + "/" + speed;
+		return "[" + name + "] " + level + ":" + life + ":" + strengh + ":" + speed;
 	}
 }
