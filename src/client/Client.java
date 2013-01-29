@@ -1,6 +1,7 @@
 package client;
 
 import java.net.Socket;
+import java.util.Scanner;
 
 import network.Protocol;
 
@@ -9,13 +10,77 @@ public class Client {
 	/**
 	 * @param args
 	 */
+	@SuppressWarnings("null")
 	public static void main(String[] args) {
 		String server = "localhost";
 		int state = 0;
 		
 		try {
-			Socket client;
-			SessionClient session;
+			
+			Scanner sc = new Scanner(System.in);
+			boolean connection = false;
+			
+			while(!connection){
+				Socket client = new Socket(server, Protocol.PORT);
+				SessionClient session = new SessionClient(client);
+				System.out.println("Bienvenue dans le jeu des Brutes");
+				System.out.println("Quel est votre login ?");
+				String login = sc.nextLine();
+				int IDbrute = session.getLogin(login);
+				client.close();
+				
+				if(IDbrute>=0){
+					System.out.println("Bonjour " + login);
+					client = new Socket(server, Protocol.PORT);
+					session = new SessionClient(client);
+					session.getBruteInfo(IDbrute);
+					client.close();
+					boolean combat = true ;
+					while(combat){
+						System.out.println("Choisissez le type de combat :");
+						System.out.println("1. Je veux gagner.");
+						System.out.println("2. Je veux perdre.");
+						System.out.println("3. Je veux un combat équitable.");
+						String typeCombat = sc.nextLine();
+						
+						if(typeCombat == "1"){
+							client = new Socket(server, Protocol.PORT);
+							session = new SessionClient(client);
+							int IDadversaire = session.getAdversaire(IDbrute);
+							session.getVictory(IDbrute, IDadversaire);
+							client.close();
+						}
+						else if (typeCombat == "2"){
+							client = new Socket(server, Protocol.PORT);
+							session = new SessionClient(client);
+							int IDadversaire = session.getAdversaire(IDbrute);
+							session.getDefeat(IDbrute, IDadversaire);
+							client.close();
+						}
+						else if (typeCombat == "3"){
+							client = new Socket(server, Protocol.PORT);
+							session = new SessionClient(client);
+							int IDadversaire = session.getAdversaire(IDbrute);
+							session.getCombat(IDbrute, IDadversaire);
+							client.close();
+						}
+						else {
+							System.out.println("Mauvais choix de combat.");
+						}
+						
+					}
+					
+				}
+				else System.out.println("Login incorect");
+			}
+			
+			
+			
+			
+			
+			
+			/*
+			
 			
 			System.out.println("Client started");
 			
@@ -90,7 +155,7 @@ public class Client {
 				System.out.println("\n[" + state++ + "]");
 				session.getCombat(2, 3);
 				client.close();
-			}
+			}*/
 			
 			System.out.println("\nClient stopped");
 		}
