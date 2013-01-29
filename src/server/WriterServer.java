@@ -37,7 +37,7 @@ public class WriterServer extends Writer {
 		}
 		
 		if (id != -1) {
-			System.out.print("\nServer send: " + (byte) Protocol.REPLY_LOGIN + " [REPLY_LOGIN] " + id);
+			System.out.println("\nServer send: " + (byte) Protocol.REPLY_LOGIN + " [REPLY_LOGIN] " + id);
 			super.writeDiscriminant(Protocol.REPLY_LOGIN);
 			super.writeInt(id);
 			super.send();
