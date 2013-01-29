@@ -5,7 +5,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 import network.Protocol;
-import network.Reader;
 
 public class Server {
 
@@ -16,18 +15,14 @@ public class Server {
 		try {
 			ServerSocket server = new ServerSocket(Protocol.PORT);
 			System.out.println("Server started");
+			SessionServer s;
 			
 			while (true) {
 				System.out.println("\nready");
-				
-				Socket client = server.accept();
-				Reader reader = new ReaderServer(client.getInputStream());
-				
-				byte discriminant = reader.readDiscriminant();
-				System.out.print("Server received: " + discriminant + " ");
-				
-				Process.decode(discriminant, client, reader);
-				
+		
+				Socket client = server.accept();		
+				s = new SessionServer(client);
+				s.decode(new ReaderServer(client.getInputStream()));
 				client.close();
 			}
 		
