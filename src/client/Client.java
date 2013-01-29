@@ -1,9 +1,5 @@
 package client;
 
-import java.net.Socket;
-
-import network.Protocol;
-
 public class Client {
 	
 	/**
@@ -11,87 +7,33 @@ public class Client {
 	 */
 	public static void main(String[] args) {
 		String server = "localhost";
-		int state = 0;
 		
 		try {
-			Socket client;
-			SessionClient session;
+			SessionClient s = new SessionClient(server);
 			
 			System.out.println("Client started");
 			
-			// QUERY_TEST
-			client = new Socket(server, Protocol.PORT);
-			session = new SessionClient(client);
-			System.out.println("\n[" + state++ + "]");
-			session.query_test();
-			client.close();
+			s.query_test();
 			
-			// LOGIN
-			client = new Socket(server, Protocol.PORT);
-			session = new SessionClient(client);
-			System.out.println("\n[" + state++ + "]");
-			session.getLogin("Valoo");
-			client.close();
-			client = new Socket(server, Protocol.PORT);
-			session = new SessionClient(client);
-			System.out.println("\n[" + state++ + "]");
-			session.getLogin("unknown");
-			client.close();
-			client = new Socket(server, Protocol.PORT);
-			session = new SessionClient(client);
-			System.out.println("\n[" + state++ + "]");
-			session.getLogin("Nico");
-			client.close();
+			s.getLogin("Nicolas");
+			s.getLogin("R2D2");
 			
-			// BRUTE_INFO & BRUTE_BONUS
-			client = new Socket(server, Protocol.PORT);
-			session = new SessionClient(client);
-			System.out.println("\n[" + state++ + "]");
-			System.out.println(session.getBruteInfo(3));
-			client.close();
-			client = new Socket(server, Protocol.PORT);
-			session = new SessionClient(client);
-			System.out.println("\n[" + state++ + "]");
-			System.out.println(session.getBruteBonus(0));
-			client.close();
+			s.getBruteInfo(s.getLogin("R2D2"));
+			s.getBruteInfo(10);
 			
-			// ADVERSAIRE
-			client = new Socket(server, Protocol.PORT);
-			session = new SessionClient(client);
-			System.out.println("\n[" + state++ + "]");
-			session.getAdversaire(1);
-			client.close();
+			s.getBruteBonus(s.getLogin("R2D2"));
+			s.getBruteBonus(2);
+			s.getBruteBonus(10);
 			
-			// COMBAT
-			client = new Socket(server, Protocol.PORT);
-			session = new SessionClient(client);
-			System.out.println("\n[" + state++ + "]");
-			session.getVictory(0, 0);
-			client.close();
-			client = new Socket(server, Protocol.PORT);
-			session = new SessionClient(client);
-			System.out.println("\n[" + state++ + "]");
-			session.getDefeat(0, 0);
-			client.close();
-			client = new Socket(server, Protocol.PORT);
-			session = new SessionClient(client);
-			System.out.println("\n[" + state++ + "]");
-			session.getVictory(1, 2);
-			client.close();
-			client = new Socket(server, Protocol.PORT);
-			session = new SessionClient(client);
-			System.out.println("\n[" + state++ + "]");
-			session.getDefeat(2, 3);
-			client.close();
+			s.getAdversaire(s.getLogin("R2D2"));
 			
-			for (int i=0; i<10; i++) {
-				client = new Socket(server, Protocol.PORT);
-				session = new SessionClient(client);
-				System.out.println("\n[" + state++ + "]");
-				session.getCombat(2, 3);
-				client.close();
-			}
+			s.getVictory(0, 1);
+			s.getDefeat(1,1);
 			
+			for (int i=0; i<10; i++)
+				s.getCombat(2, 3);
+			
+
 			System.out.println("\nClient stopped");
 		}
 		catch (Exception e) {
