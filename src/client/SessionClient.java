@@ -102,8 +102,8 @@ public class SessionClient {
 				
 		System.out.print("Client received: " + d + " ");
 		
-		if (d == Protocol.REPLY_BRUTE_INFO) {		
-			System.out.print("[REPLY_BRUTE_INFO] ");
+		if (d == Protocol.REPLY_BRUTE_BONUS) {		
+			System.out.print("[REPLY_BRUTE_BONUS] ");
 			
 			int size = r.readInt();
 			System.out.print(size + " ");
