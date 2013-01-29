@@ -31,8 +31,20 @@ public class SessionServer {
 	}
 	
 	public void replyLogin(String login) throws IOException {
-		if (login.equals("Valoo") || login.equals("Nico"))
-			ok();
+		int id = -1;
+		for (int i=0; i<Data.brutes.size(); i++) {
+			if (Data.brutes.get(i).name().equals(login)) {
+				id = i;
+				break;
+			}
+		}
+		
+		if (id != -1) {
+			System.out.print("\nServer send: " + (byte) Protocol.REPLY_LOGIN + " [REPLY_LOGIN] " + id);
+			writer.writeDiscriminant(Protocol.REPLY_LOGIN);
+			writer.writeInt(id);
+			writer.send();
+		}
 		else
 			ko();
 	}
