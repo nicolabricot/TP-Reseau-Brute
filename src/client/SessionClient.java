@@ -29,7 +29,7 @@ public class SessionClient {
 		return false;
 	}
 	
-	public boolean getLogin(String user) throws IOException {
+	public int getLogin(String user) throws IOException {
 		Writer w = new WriterClient(this.socket.getOutputStream());
 		
 		System.out.println("Client send: " + (byte) Protocol.GET_LOGIN + " [GET_LOGIN] " + user);
@@ -39,7 +39,15 @@ public class SessionClient {
 		w.send();
 		
 		Reader r = new ReaderClient(socket.getInputStream());
-		return status(r.readDiscriminant());
+		byte d = r.readDiscriminant();
+		
+		if (d == Protocol.REPLY_LOGIN) {
+			int id = r.readInt();
+			System.out.println("Client received: " + Protocol.REPLY_LOGIN + " [REPLY_LOGIN] " + id);
+			return id;
+		}
+		return -1;
+			
 	}
 
 	public boolean query_test() throws IOException {
@@ -94,8 +102,8 @@ public class SessionClient {
 				
 		System.out.print("Client received: " + d + " ");
 		
-		if (d == Protocol.REPLY_BRUTE_INFO) {		
-			System.out.print("[REPLY_BRUTE_INFO] ");
+		if (d == Protocol.REPLY_BRUTE_BONUS) {		
+			System.out.print("[REPLY_BRUTE_BONUS] ");
 			
 			int size = r.readInt();
 			System.out.print(size + " ");
