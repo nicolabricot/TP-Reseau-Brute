@@ -25,6 +25,7 @@ public abstract class Protocol {
 	static final public byte GET_COMBAT = 0x2A; // 42
 	
 	/* SERVER -> CLIENT */
+	static final public byte REPLY_LOGIN = 0xF; // 15
 	// brutes
 	static final public byte REPLY_BRUTE_INFO = 0x1E; // 30
 	static final public byte REPLY_BRUTE_BONUS = 0x1F; // 31
