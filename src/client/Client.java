@@ -1,7 +1,11 @@
 package client;
 
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import brute.Bonus;
+import brute.Brute;
 
 import network.Protocol;
 
@@ -10,10 +14,8 @@ public class Client {
 	/**
 	 * @param args
 	 */
-	@SuppressWarnings("null")
 	public static void main(String[] args) {
 		String server = "localhost";
-		int state = 0;
 		
 		try {
 			
@@ -33,8 +35,13 @@ public class Client {
 					System.out.println("Bonjour " + login);
 					client = new Socket(server, Protocol.PORT);
 					session = new SessionClient(client);
-					session.getBruteInfo(IDbrute);
+					Brute b = new Brute(session.getBruteInfo(IDbrute)); 
 					client.close();
+					System.out.println(b);
+					client = new Socket(server, Protocol.PORT);
+					session = new SessionClient(client);
+					ArrayList<Bonus> bonus = new ArrayList<Bonus>(session.getBruteBonus(IDbrute));
+					System.out.println(bonus);
 					boolean combat = true ;
 					while(combat){
 						System.out.println("Choisissez le type de combat :");
