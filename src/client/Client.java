@@ -9,9 +9,10 @@ public class Client {
 		String server = "localhost";
 		
 		try {
-			SessionClient s = new SessionClient(server);
-			
 			System.out.println("Client started");
+			
+			
+			SessionClient s = new SessionClient(server);
 			
 			s.query_test();
 			
