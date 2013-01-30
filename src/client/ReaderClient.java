@@ -68,7 +68,7 @@ public class ReaderClient extends Reader {
 				int strengh = super.readInt();
 				int speed = super.readInt();
 				System.out.print(name + " " + level + " " + life + " " + strengh + " " + speed + " ");
-				bonus.add(new Bonus(name, level, life, strengh, speed));
+				bonus.add(new Bonus(name, life, strengh, speed));
 			}
 			
 			System.out.println();

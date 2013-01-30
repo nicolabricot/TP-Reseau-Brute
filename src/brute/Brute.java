@@ -42,10 +42,7 @@ public class Brute {
 	/* INFOS */
 	
 	public int level() {
-		int bonus = 0;
-		for (int i=0; i<this.bonus.size(); i++)
-			bonus += this.bonus.get(i).level();
-		return (level + bonus) > 0 ? level + bonus : 0;
+		return level;
 	}
 	public Brute addLevel(int level) {
 		this.level += level > 0 ? level : 0;
