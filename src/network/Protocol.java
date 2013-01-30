@@ -17,8 +17,9 @@ public abstract class Protocol {
 	// brutes
 	static final public byte GET_BRUTE_INFO = 0x14; // 20
 	static final public byte GET_BRUTE_BONUS = 0x15; // 21
-	static final public byte GET_BRUTE_IMG = 0x16; // 22
-	static final public byte GET_ADVERSAIRE = 0x17; // 23
+	static final public byte GET_IMG_BRUTE = 0x16; // 22
+	static final public byte GET_IMG_BONUS = 0x17; // 23
+	static final public byte GET_ADVERSAIRE = 0x18; // 24
 	// combat
 	static final public byte GET_VICTORY = 0x28; // 40
 	static final public byte GET_DEFEAT = 0x29; // 41
@@ -29,8 +30,9 @@ public abstract class Protocol {
 	// brutes
 	static final public byte REPLY_BRUTE_INFO = 0x1E; // 30
 	static final public byte REPLY_BRUTE_BONUS = 0x1F; // 31
-	static final public byte REPLY_BRUTE_IMG = 0x20; // 32
-	static final public byte REPLY_ADVERSAIRE = 0x21; // 33
+	static final public byte REPLY_IMG_BRUTE = 0x20; // 32
+	static final public byte REPLY_IMG_BONUS = 0x21; // 33
+	static final public byte REPLY_ADVERSAIRE = 0x22; // 34
 	// combat
 	static final public byte REPLY_COMBAT = 0x2D; // 45
 	
