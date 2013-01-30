@@ -69,9 +69,8 @@ public class WriterServer extends Writer {
 		super.writeInt(b.size());
 		
 		for (int i=0; i<b.size(); i++) {
-			System.out.print(b.get(i).name() + " " + b.get(i).level() + " " + b.get(i).life() + " " + b.get(i).strengh() + " " + b.get(i).speed() + " ");
+			System.out.print(b.get(i).name() + " " + b.get(i).life() + " " + b.get(i).strengh() + " " + b.get(i).speed() + " ");
 			super.writeString(b.get(i).name());
-			super.writeInt(b.get(i).level());
 			super.writeInt(b.get(i).life());
 			super.writeInt(b.get(i).strengh());
 			super.writeInt(b.get(i).speed());

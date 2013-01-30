@@ -3,14 +3,12 @@ package brute;
 public class Bonus {
 	
 	protected String name;
-	protected int level;
 	protected int life;
 	protected int strengh;
 	protected int speed;
 	
-	public Bonus(String name, int level, int life, int strengh, int speed) {
+	public Bonus(String name, int life, int strengh, int speed) {
 		this.name = name;
-		this.level = level;
 		this.life = life;
 		this.strengh = strengh;
 		this.speed = speed;
@@ -18,9 +16,6 @@ public class Bonus {
 	
 	public String name() {
 		return name;
-	}
-	public int level() {
-		return level;
 	}
 	public int life() {
 		return life;
@@ -33,6 +28,6 @@ public class Bonus {
 	}
 	
 	public String toString() {
-		return "[" + name + "] " + level + ":" + life + ":" + strengh + ":" + speed;
+		return "[" + name + "] " + life + ":" + strengh + ":" + speed;
 	}
 }

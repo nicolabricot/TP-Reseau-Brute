@@ -18,12 +18,12 @@ public abstract class Data {
 				new Brute("Stupid bot Tree")
 			);
 	public static final List<Bonus> availableBonus = Arrays.asList(
-				new Bonus("Usain Bolt", 0, 0, 0, 10),
-				new Bonus("Sébastien Chabal", 0, 0, 10, 0 ),
-				new Bonus("Harry Potter", 10, 0, 0, 0),
-				new Bonus("Hermione Granger", 5, 5, 0, 0),
-				new Bonus("Hagrid", 8, 0, 8, -4),
-				new Bonus("Chuck Norris", 50, 100, 100, 100)
+				new Bonus("Usain Bolt", 0, 0, 10),
+				new Bonus("Sébastien Chabal", 0, 10, 0 ),
+				new Bonus("Harry Potter", 10, 0, 0),
+				new Bonus("Hermione Granger", 5, 5, 0),
+				new Bonus("Hagrid", 8, 8, -4),
+				new Bonus("Chuck Norris", 100, 100, 100)
 			);
 	
 	public static void populate() {
