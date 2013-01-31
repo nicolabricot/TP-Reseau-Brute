@@ -13,7 +13,6 @@ public class Application {
  
     JFrame fenetre = new JFrame();
     JButton login = new JButton("Log in");
-    JButton logout = new JButton("Log out");
     JButton challenger = new JButton("Challenger");
     JButton combat = new JButton("Combat loyal");
     JButton loose = new JButton("Loose");
@@ -33,7 +32,6 @@ public class Application {
     fenetre.add(loose);
     fenetre.add(combat);
     fenetre.add(challenger);
-    fenetre.add(logout);
     fenetre.add(login);
     
     
