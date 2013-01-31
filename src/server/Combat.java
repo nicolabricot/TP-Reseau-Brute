@@ -1,3 +1,7 @@
+/**
+ * @author Nicolas
+ */
+
 package server;
 
 public class Combat {

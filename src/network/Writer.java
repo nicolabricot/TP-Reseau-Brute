@@ -1,3 +1,7 @@
+/**
+ * @author Nicolas
+ */
+
 package network;
 
 import java.io.ByteArrayOutputStream;

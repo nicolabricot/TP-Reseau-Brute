@@ -1,3 +1,7 @@
+/**
+ * @author Nicolas
+ */
+
 package client;
 
 import java.io.IOException;

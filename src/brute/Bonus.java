@@ -1,3 +1,7 @@
+/**
+ * @author Nicolas
+ */
+
 package brute;
 
 public class Bonus {

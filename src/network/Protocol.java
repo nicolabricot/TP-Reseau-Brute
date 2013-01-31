@@ -1,3 +1,7 @@
+/**
+ * @author Nicolas
+ */
+
 package network;
 
 public abstract class Protocol {
