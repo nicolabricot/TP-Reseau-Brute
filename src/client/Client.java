@@ -50,12 +50,9 @@ public class Client {
 		System.out.println("Client started");
 		
 		// get server info
-		/*
 		System.out.println("\nChoose the server you want to connect (e.g. localhost)");
 		prompt()
 		server = fetch();
-		*/
-		server = "192.168.0.10";
 		
 		try {
 			
