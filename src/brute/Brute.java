@@ -127,6 +127,10 @@ public class Brute {
 			this.bonus.add(bonus);
 		}
 	}
+	public void removeBonus() {
+		if (this.bonus.size() > 0)
+			this.bonus.remove(this.bonus.size()-1);
+	}
 	
 	
 	public String toString() {
