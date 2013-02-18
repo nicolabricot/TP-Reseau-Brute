@@ -32,6 +32,7 @@ public class Bonus {
 	}
 	
 	public String toString() {
-		return "[" + name + "] " + life + ":" + strengh + ":" + speed;
+		return "[" + name + "] life: " + life + " | strengh: " + strengh + " | speed: " + speed;
+		//return "[" + name + "] " + life + ":" + strengh + ":" + speed;
 	}
 }
