@@ -20,8 +20,8 @@ public class Combat {
 	private void winner(int brute) {
 		// Win a level
 		Data.brutes.get(brute).addLevel(1);
-		// 33% to win a bonus
-		if (((int) Math.floor(Math.random()*100)) <= 33)
+		// 45% to win a bonus
+		if (((int) Math.floor(Math.random()*100)) <= 45)
 			Data.brutes.get(brute).addBonus(Data.availableBonus.get((int) Math.floor(Math.random()*Data.availableBonus.size())));
 		// 33% to win life between 1 and 5
 		if (((int) Math.floor(Math.random()*100)) <= 33)
@@ -34,8 +34,8 @@ public class Combat {
 			Data.brutes.get(brute).addSpeed(((int) Math.floor(Math.random()*4))+1);
 	}
 	private void looser(int brute) {
-		// 50% to lose a bonus
-		if (((int) Math.floor(Math.random()*10)) < 5)
+		// 40% to lose a bonus
+		if (((int) Math.floor(Math.random()*10)) <= 4)
 			Data.brutes.get(brute).removeBonus();
 	}
 	
@@ -46,30 +46,74 @@ public class Combat {
 	}
 	
 	public void loyal() {
-		//winner = ((int) Math.floor(Math.random()*10)) < 5 ? one : two ;
 		
 		// a = probability (0-100) that one (b1) win
-		int a = 0;
+		int a = 50;
 		
 		Brute b1 = Data.brutes.get(one);
 		Brute b2 = Data.brutes.get(two);
 		
-		// A little chance in this world
-		a = ((int) Math.floor(Math.random()*10)) < 5 ? 25 : 75 ;
+		System.out.println("\n  > details combat");
 		
 		// compare the level
-		a += (b1.level() - b2.level() > 2) ? 10 : -10;
-		a += (b1.level() - b2.level() > 8) ? 15 : 0;
-		a += (b1.level() - b2.level() < 8) ? -15 : 0;
+		int level = b1.level() - b2.level();
+		if (level == 0) {
+			a += ((int) Math.floor(Math.random()*10)) < 5 ? 5 : -5;
+		}
+		else if (level > 0 && level <= 4)
+			a += 8;
+		else if (level > 4)
+			a += 16;
+		else if (level < 0 && level >= -4)
+			a -= 8;
+		else
+			a -= 16;
+		System.out.println("    probability to win: " + a);
 		
 		// compare the strengh
-		a += b1.strengh() > b2.strengh() ? 10 : -10;
+		int strengh = b1.strengh() - b2.strengh();
+		if (strengh == 0) {
+			a += ((int) Math.floor(Math.random()*10)) < 5 ? 5 : -5;
+		}
+		else if (strengh > 0 && strengh <= 4)
+			a += 8;
+		else if (strengh > 4)
+			a += 16;
+		else if (strengh < 0 && strengh >= -4)
+			a -= 8;
+		else
+			a -= 16;
+		System.out.println("    probability to win: " + a);
 		
 		// compare the speed
-		a += b1.speed() > b2.speed() ? 10 : -10;
+		int speed = b1.speed() - b2.speed();
+		if (speed == 0) {
+			a += ((int) Math.floor(Math.random()*10)) < 5 ? 5 : -5;
+		}
+		else if (speed > 0 && speed <= 4)
+			a += 8;
+		else if (speed > 4)
+			a += 16;
+		else if (speed < 0 && speed >= -4)
+			a -= 8;
+		else
+			a -= 16;
+		System.out.println("    probability to win: " + a);
 		
 		// compare the life
-		a += b1.life() > b2.life() ? 10 : -10;
+		int life = b1.life() - b2.life();
+		if (life == 0) {
+			a += ((int) Math.floor(Math.random()*10)) < 5 ? 5 : -5;
+		}
+		else if (life > 0 && life <= 4)
+			a += 8;
+		else if (life > 4)
+			a += 16;
+		else if (life < 0 && life >= -4)
+			a -= 8;
+		else
+			a -= 16;
+		System.out.print("    probability to win: " + a);
 		
 		// And finnaly the winner...
 		winner = a > 50 ? one : two;
