@@ -19,7 +19,10 @@ public abstract class Data {
 				new Brute("R2D2", 2, 20, 5, 0),
 				new Brute("Stupid bot One"),
 				new Brute("Stupid bot Two"),
-				new Brute("Stupid bot Tree")
+				new Brute("Stupid bot Tree"),
+				new Brute("Hassen"),
+				new Brute("Nico"),
+				new Brute("Valoo")
 			);
 	public static final List<Bonus> availableBonus = Arrays.asList(
 				new Bonus("Usain Bolt", 0, 0, 10),
