@@ -51,7 +51,7 @@ public class Client {
 		
 		// get server info
 		System.out.println("\nChoose the server you want to connect (e.g. localhost)");
-		prompt()
+		prompt();
 		server = fetch();
 		
 		try {
