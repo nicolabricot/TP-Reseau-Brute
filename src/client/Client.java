@@ -14,7 +14,6 @@ public class Client {
 	
 	private static final String prompt_char = "-> ";
 	private static Scanner scan = new Scanner(System.in);	
-	private static boolean run = true;
 	
 	private static String fetch() {
 		return scan.next();
@@ -23,7 +22,7 @@ public class Client {
 	private static void menu() {
 		System.out.println("\n[c] loyal combat");
 		System.out.println("[w] force to win");
-		System.out.println("[l] force to loose");
+		System.out.println("[l] force to lose");
 		System.out.println("[q] quit program");
 		prompt();
 	}
@@ -31,17 +30,15 @@ public class Client {
 	private static void prompt() {
 		System.out.print(prompt_char);
 	}
-	
-	private static void decode(String cmd) {
-		if (cmd.equals("q"))
-			run = false;
-	}
+
 	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		String server = "localhost";
+		String cmd;
+		boolean run = true;
 		
 		int id = -1; // id of me
 		int adversaire = -1; // id of challenger
@@ -84,11 +81,11 @@ public class Client {
 				System.out.println("\nYou have no bonus yet!");
 			else
 				System.out.println("\nYou have " + me_bonus.size() + " bonus :) " + "\n" + me_bonus);
-
-			
+						
 			// it's time to play
 			run = true;
 			while (run) {
+				
 				// get (new) adversaire
 				adversaire = s.getAdversaire(id);
 				challenger = s.getBruteInfo(adversaire);
@@ -101,7 +98,48 @@ public class Client {
 				
 				// display menu
 				menu();
-				decode(fetch());
+				cmd = fetch();
+				
+				// decode command
+				if (cmd.equals("q"))
+					run = false;
+				else if (cmd.equals("c") || cmd.equals("l") || cmd.equals("w"))  {
+					int winner;
+					if (cmd.equals("w")) {
+						s.getVictory(id, adversaire);
+						winner = id;
+					}
+					else if (cmd.equals("l")) {
+						s.getDefeat(id, adversaire);
+						winner = adversaire;
+					}
+					else
+						winner = s.getCombat(id, adversaire);
+					
+					
+					if (adversaire == winner)
+						System.out.println("\n>> You loose this combat :(");
+					else
+						System.out.println("\n>> You won this combat :)");
+					
+					// refresh brute and bonus info
+					me = s.getBruteInfo(id);
+					System.out.println("\n" + me);
+					me_bonus = s.getBruteBonus(id);
+					if (me_bonus.isEmpty())
+						System.out.println("\nYou have no bonus yet!");
+					else
+						System.out.println("\nYou have " + me_bonus.size() + " bonus :) " + "\n" + me_bonus);
+					
+					System.out.println("\nWant to continue?\n[y] to continue, other key to quit");
+					prompt();
+					if (!fetch().equals("y"))
+						run = false;
+					
+				}
+				else
+					System.out.println("Command not valid, try again.");
+				
 			}
 
 
