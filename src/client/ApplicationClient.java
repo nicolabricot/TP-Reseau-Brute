@@ -10,7 +10,7 @@ import java.util.Scanner;
 import brute.Brute;
 import brute.Bonus;
 
-public class Client {
+public class ApplicationClient {
 	
 	private static final String prompt_char = "-> ";
 	private static Scanner scan = new Scanner(System.in);	

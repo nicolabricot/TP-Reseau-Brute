@@ -10,7 +10,7 @@ import java.net.Socket;
 
 import network.Protocol;
 
-public class Server {
+public class ApplicationServer {
 
 	public static void main(String[] args) {
 		
