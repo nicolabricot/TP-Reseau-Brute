@@ -1,27 +1,40 @@
 package client.ihm;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
+
 import javax.swing.JPanel;
+
+import client.SessionClient;
 import server.Data;
 
+import brute.Bonus;
 import brute.Brute;
 
 public class PanneauBrute extends JPanel {
 	String server = "localhost";
-	private int idBrute1;
+	private int idBruteME;
 	
 	public PanneauBrute(int id1){
-		this.idBrute1 = id1;
+		this.idBruteME = id1;
 	}
 	
 	
 
 	public void paintComponent(Graphics g) {
 		try {
+			SessionClient socket = new SessionClient(server);
 
 			// Font font = new Font("Times New Roman", Font., 20);
-			Brute bMe = new Brute(Data.availableBrutes.get(this.idBrute1));
-			Brute bAd = new Brute(Data.availableBrutes.get(1));
+			Brute bMe = socket.getBruteInfo(idBruteME);
+			int id_ad = socket.getAdversaire(idBruteME);
+			Brute bAd = socket.getBruteInfo(id_ad);
+			ArrayList<Bonus> bonus_me = socket.getBruteBonus(idBruteME);
+			ArrayList<Bonus> bonus_ad = socket.getBruteBonus(id_ad);
+			for (int i=0; i<bonus_me.size(); i++)
+				bMe.addBonus(bonus_me.get(i));
+			for (int i=0; i<bonus_ad.size(); i++)
+				bAd.addBonus(bonus_ad.get(i));
 			// g.setFont(font);
 
 			// x1, y1, width, height

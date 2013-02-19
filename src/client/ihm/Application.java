@@ -7,7 +7,9 @@ import java.io.IOException;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import client.SessionClient;
 
@@ -27,7 +29,7 @@ public class Application {
 			s = new SessionClient("localhost");
 			s.query_test();
 
-			loginMe = s.getLogin("R2D2");
+			//loginMe;
 			loginAd = s.getLogin("Stupid bot Tree");
 
 			if (loginMe == 0)
@@ -41,11 +43,20 @@ public class Application {
 			fenetre.setLocationRelativeTo(null);
 			fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			fenetre.setVisible(true);
-
+			
+			
+			final JPanel b1 = new JPanel();
+			JTextField pseudo = new JTextField("Hassen");
+			JLabel labelPseudo = new JLabel("Pseudo");
+			b1.add(labelPseudo);
+			b1.add(pseudo);
+			
+			loginMe = s.getLogin(pseudo.getText());
+			
 			brutes = new PanneauBrute(loginMe);
 			fenetre.setContentPane(brutes);
 
-			final JPanel b1 = new JPanel();
+	
 			b1.setLayout(new BoxLayout(b1, BoxLayout.LINE_AXIS));
 
 			final JPanel b3 = new JPanel();
@@ -93,6 +104,9 @@ public class Application {
 						b3.add(buttonEquals);
 						b3.add(buttonLoose);
 						b3.add(buttonWin);
+						
+						//
+						
 					} else {
 						b3.removeAll();
 						fenetre.setSize(1201, 701);
