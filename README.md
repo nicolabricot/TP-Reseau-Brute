@@ -2,6 +2,8 @@
 
 Code source du client/serveur Java
 
+Dépôt GitHub associé : [https://github.com/nicolabricot/TP-Reseau-Brute](https://github.com/nicolabricot/TP-Reseau-Brute)
+
 ## Utilisation
 
 1. Lancer la méthode static main de la classe ApplicationServer du package Server
