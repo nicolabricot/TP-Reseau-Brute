@@ -1,3 +1,7 @@
+/**
+ * @author Nicolas
+ */
+
 package brute;
 
 public class Bonus {
@@ -28,6 +32,6 @@ public class Bonus {
 	}
 	
 	public String toString() {
-		return "[" + name + "] " + life + ":" + strengh + ":" + speed;
+		return "[" + name + "] life: " + life + " | power: " + strengh + " | speed: " + speed;
 	}
 }

@@ -1,3 +1,7 @@
+/**
+ * @author Nicolas
+ */
+
 package client;
 
 import java.io.IOException;
@@ -18,6 +22,7 @@ public class SessionClient {
 	private String server = "localhost";
 	private WriterClient w;
 	private ReaderClient r;
+	private boolean mute = false;
 	private Socket socket;
 	
 	public SessionClient() {
@@ -39,24 +44,32 @@ public class SessionClient {
 	private InputStream in() throws IOException {
 		return socket.getInputStream();
 	}
+	public void mute() {
+		mute = true;
+	}
+	public void talk() {
+		mute = false;
+	}
 	
 	private boolean status(byte discriminant) throws IOException {		
-		System.out.print("Client received: " +  (byte) discriminant + " ");
+		if (!mute) System.out.print("Client received: " +  (byte) discriminant + " ");
 		
 		if (discriminant == Protocol.OK) {
-			System.out.println("[OK]");
+			if (!mute) System.out.println("[OK]");
 			return true;
 		}
-		System.out.println("[KO]");
+		if (!mute) System.out.println("[KO]");
 		return false;
 	}
 	
 	public boolean query_test() throws IOException {
 		open();
 		w = new WriterClient(out());
+		if (mute) w.mute();
 		w.query_test();
 
 		r = new ReaderClient(in());
+		if (mute) r.mute();
 		boolean response = status(r.readDiscriminant());
 		close();
 		
@@ -66,9 +79,11 @@ public class SessionClient {
 	public int getLogin(String user) throws IOException {
 		open();
 		w = new WriterClient(out());
+		if (mute) w.mute();
 		w.getLogin(user);
 		
 		r = new ReaderClient(in());
+		if (mute) r.mute();
 		int response = r.replyLogin();
 		close();
 		
@@ -78,9 +93,11 @@ public class SessionClient {
 	public Brute getBruteInfo(int id) throws IOException {
 		open();
 		w = new WriterClient(out());
+		if (mute) w.mute();
 		w.getBruteInfos(id);
 		
 		r = new ReaderClient(in());
+		if (mute) r.mute();
 		Brute response = r.replyBruteInfo();
 		close();
 		
@@ -90,9 +107,11 @@ public class SessionClient {
 	public ArrayList<Bonus> getBruteBonus(int id) throws IOException {
 		open();
 		w = new WriterClient(out());
+		if (mute) w.mute();
 		w.getBruteBonus(id);
 		
 		r = new ReaderClient(in());
+		if (mute) r.mute();
 		ArrayList<Bonus> response = r.replyBruteBonus();
 		close();
 		
@@ -102,9 +121,11 @@ public class SessionClient {
 	public int getAdversaire(int me) throws IOException {
 		open();
 		w = new WriterClient(out());
+		if (mute) w.mute();
 		w.getAdversaire(me);
 		
 		r = new ReaderClient(in());
+		if (mute) r.mute();
 		int response = r.replyAdversaire();
 		close();
 		
@@ -114,9 +135,11 @@ public class SessionClient {
 	public boolean getVictory(int one, int two) throws IOException {
 		open();
 		w = new WriterClient(out());
+		if (mute) w.mute();
 		w.getVictory(one, two);
 		
 		r = new ReaderClient(in());
+		if (mute) r.mute();
 		boolean response = status(r.readDiscriminant());
 		close();
 		
@@ -126,9 +149,11 @@ public class SessionClient {
 	public boolean getDefeat(int one, int two) throws IOException {
 		open();
 		w = new WriterClient(out());
+		if (mute) w.mute();
 		w.getDefeat(one, two);
 		
 		r = new ReaderClient(in());
+		if (mute) r.mute();
 		boolean response = status(r.readDiscriminant());
 		close();
 		
@@ -138,9 +163,11 @@ public class SessionClient {
 	public int getCombat(int one, int two) throws IOException {
 		open();
 		w = new WriterClient(out());
+		if (mute) w.mute();
 		w.getCombat(one, two);
 		
 		r = new ReaderClient(in());
+		if (mute) r.mute();
 		int response = r.replyCombat();
 		close();
 		

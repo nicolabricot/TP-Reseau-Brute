@@ -1,3 +1,7 @@
+/**
+ * @author Nicolas
+ */
+
 package brute;
 
 import java.util.ArrayList;
@@ -122,6 +126,10 @@ public class Brute {
 			this.bonus.remove(0);
 			this.bonus.add(bonus);
 		}
+	}
+	public void removeBonus() {
+		if (this.bonus.size() > 0)
+			this.bonus.remove(this.bonus.size()-1);
 	}
 	
 	
