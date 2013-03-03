@@ -31,6 +31,7 @@ public class Bonus {
 		return speed;
 	}
 	
+	@Override
 	public String toString() {
 		return "[" + name + "] life: " + life + " | power: " + strengh + " | speed: " + speed;
 	}

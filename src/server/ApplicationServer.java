@@ -17,6 +17,7 @@ public class ApplicationServer {
 		Data.populate();
 		
 		try {
+			@SuppressWarnings("resource")
 			ServerSocket server = new ServerSocket(Protocol.PORT);
 			System.out.println("Server started");
 			SessionServer s;

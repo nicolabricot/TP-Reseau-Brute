@@ -133,6 +133,7 @@ public class Brute {
 	}
 	
 	
+	@Override
 	public String toString() {
 		return "[" + name + "]\nLevel: \t" + level() + "\nLife: \t" + life() + "\nPower: \t" + strengh() + "\nSpeed: \t" + speed() ;
 	}
